@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: white;
+}
+
+#contenido{
+    background: #f1f1f1;
+    margin-top: 57px;
+    height: calc(100vh - 57px - 37px);
+}
+
+footer{
+    font-size: .6rem;
+}
+footer p{
+    margin: 0;
+}
