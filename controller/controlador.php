@@ -4,7 +4,12 @@ $mapRouter = array(
     "/",
     "/usuario",
     "/cliente",
-    "/empleado"
+    "/empleado",
+    "/clave_app",
+    "/logout",
+    "/dashboard",
+    "/iva",
+    "/categorias"
 );
 
 $route = $_SERVER['REQUEST_URI'];
@@ -26,6 +31,9 @@ if (in_array($route, $mapRouter)) {
     //llama a los model
     $routeUri = explode('/', $route);
     $routeModel = $routeUri[2];
+    $params = explode('?', $routeModel);
+    if(count($params) > 1)          //para peticiones get
+        $routeModel = $params[0];
 
     if ( is_file("../model/". $routeModel .".php") ) {
         require_once("../model/" . $routeModel . ".php");
