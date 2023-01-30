@@ -1,6 +1,6 @@
 </div>
 
-<footer class="bg-dark text-white text-center py-1">
+<footer class="bg-dark text-white text-center py-1 ">
     <p><?=date('Y')?> | Riobamba - Ecuador</p>
     <small>Desarrollador por: Darwin B - Diego C - Andrés G - Johan G - Alexis C - Dayana B</small>
 </footer>

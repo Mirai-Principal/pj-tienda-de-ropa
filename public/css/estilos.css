@@ -11,6 +11,7 @@ body{
     background: #f1f1f1;
     margin-top: 57px;
     height: calc(100vh - 57px - 37px);
+    overflow-y: auto;
 }
 
 footer{

@@ -1,12 +1,40 @@
 <?php
+
 $mapRouter = array(
-    "inicio" => "portada.php",
+    "/",
+    "/usuario",
+    "/cliente",
+    "/empleado"
 );
 
-$route = "inicio";
-if($_GET)
-    $route = $_GET["route"];
-else if ($_POST)
-    $route = $_POST["route"];
+$route = $_SERVER['REQUEST_URI'];
 
-require_once("./view/".$mapRouter[$route]);
+//llama a las vistas
+if (in_array($route, $mapRouter)) {
+    require_once("../config/variables.php");
+
+    require_once("../view/header.php");
+
+    if ($route == '/') {
+        require_once("../view/portada.php");
+    } else {
+        require_once("../view" . $route . ".php");
+    }
+    
+    require_once("../view/footer.php");
+} else {
+    //llama a los model
+    $routeUri = explode('/', $route);
+    $routeModel = $routeUri[2];
+
+    if ( is_file("../model/". $routeModel .".php") ) {
+        require_once("../model/" . $routeModel . ".php");
+    }else{
+        //404 si no existe esa ruta
+        echo "404";
+        echo $route;
+        //http_response_code(404);
+        //require 'views/404.php';
+
+    }
+}
