@@ -11,8 +11,8 @@ while ($fila = mysqli_fetch_assoc($res)) {
 ?>
 
 <style>
-    /***** Input nombre cat *****/
-    .input-newCat {
+     /***** Input nombre cat *****/
+     .input-newCat {
         position: relative;
         width: 300px;
     }
@@ -68,7 +68,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
         font-weight: bold;
     }
 
-    input#btn_enviar {
+    input#fileImg1, input#fileImgMod {
         position: absolute;
         top: 0px;
         left: 0px;
@@ -78,6 +78,9 @@ while ($fila = mysqli_fetch_assoc($res)) {
         height: 100%;
         opacity: 0;
     }
+    img{
+        max-width: 100px;
+    }
 </style>
 
 <div class="row text-center">
@@ -86,6 +89,9 @@ while ($fila = mysqli_fetch_assoc($res)) {
 <div class="row text-center">
     <div class="col">
         <button class="btn btn-primary w-50" data-bs-toggle="modal" data-bs-target="#nueva_categoria_modal">Nueva categoría</button>
+    </div>
+    <div class="col">
+        <a href="/productos" class="btn btn-primary w-50" >Ver productos</a>
     </div>
 </div>
 
@@ -97,7 +103,6 @@ while ($fila = mysqli_fetch_assoc($res)) {
                     <th scope="col">#</th>
                     <th scope="col">Categoría</th>
                     <th scope="col">Imagen</th>
-                    <th scope="col">Ver productos</th>
                     <th scope="col">Modificar</th>
                     <th scope="col">Eliminar</th>
                 </tr>
@@ -107,9 +112,9 @@ while ($fila = mysqli_fetch_assoc($res)) {
                     <tr>
                         <th scope="row"><?= $key + 1 ?></th>
                         <td><?= $fila['Des_Categoria'] ?></td>
-                        <td><img src="<?= PATH_FILES . 'categorias/' . $fila['img_categoria'] ?>" alt="" class="w-50 "></td>
-                        <td><button class="btn btn-info form-control">Ver</button></td>
-                        <td><button class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#update_categoria_modal">Modificar</button>
+                        <td><img src="<?= PATH_FILES . 'categorias/' . $fila['img_categoria'] ?>" alt="" ></td>
+
+                        <td><button class="btn btn-primary form-control btn_update" data-bs-toggle="modal" data-descripcion="<?= $fila['Des_Categoria'] ?>" data-id="<?= $fila['Id_Categoria'] ?>" data-bs-target="#update_categoria_modal">Modificar</button>
                         </td>
                         <td>
                             <a href="/categorias/delete?opcion=delete_categoria&Id_Categoria=<?= $fila['Id_Categoria'] ?>"><button class="btn btn-danger form-control">Eliminar</button></a>
@@ -120,37 +125,36 @@ while ($fila = mysqli_fetch_assoc($res)) {
         </table>
     </div>
 </div>
-
-<!-- Modal -->
 <div class="modal fade" id="nueva_categoria_modal" tabindex="-1" aria-labelledby="nueva_categoria" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="nueva_categoria">Nueva categoría</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="/categorias/insert" method="post" id="categorias_insert_form" enctype="multipart/form-data">
-                    <div class="input-newCat w-100">
-                        <input type="text" name="nombreCat" id="nonbreCat1" required>
-                        <label for="nombreCat">Ingrese la categoria</label>
-                    </div>
-                    <div id="div_file" class="w-50 text-center">
-                        <input type="file" name="fileImg" id="btn_enviar1" required>
-                        <label for="fileImg">Subir imagen</label>
-                    </div>
-                    <hr>
-                    <button type="submit" class="btn btn-primary form-control">Guardar</button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="nueva_categoria">Nueva categoría</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/categorias/insert" method="post" id="categorias_insert_form" enctype="multipart/form-data">
+                        <div class="input-newCat w-100">
+                            <input type="text" name="nombreCat1" id="nonbreCat1" required>
+                            <label for="nombreCat1">Ingrese la categoria</label>
+                        </div>
+                        <div id="div_file" class="w-50 text-center">
+                            <input type="file" name="fileImg1" id="fileImg1" required>
+                            <label for="fileImg1">Subir imagen</label>
+                        </div>
+                        <hr>
+                        <button type="submit" class="btn btn-primary form-control">Guardar</button>
 
-                    <input type="hidden" value="categorias_insert_form" name="opcion">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger form-control" data-bs-dismiss="modal">Close</button>
+                        <input type="hidden" value="categorias_insert_form" name="opcion">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger form-control" data-bs-dismiss="modal">Salir</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="update_categoria_modal" tabindex="-1" aria-labelledby="update_categoria" aria-hidden="true">
@@ -163,22 +167,36 @@ while ($fila = mysqli_fetch_assoc($res)) {
             <div class="modal-body">
                 <form action="/categorias/update" method="post" id="categorias_update_form" enctype="multipart/form-data">
                     <div class="input-newCat w-100">
-                        <input type="text" name="nombreCat" class="form-control " required>
-                        <label for="nombreCat">Ingrese la categoria</label>
+                        <input type="text" name="nombreCatMod" id="nombreCatMod" class="form-control " required>
+                        <label for="nombreCatMod">Ingrese la categoria</label>
                     </div>
                     <div id="div_file" class=" w-100 text-center">
-                        <input type="file" name="fileImg" class="form-control" required>
-                        <label for="fileImg">Subir imagen</label>
+                        <input type="file" name="fileImgMod" id="fileImgMod" class="form-control" required>
+                        <label for="fileImgMod">Subir imagen</label>
                     </div>
                     <hr>
                     <button type="submit" class="btn btn-primary form-control">Guardar</button>
 
+                    <input type="hidden" name="Id_Categoria" id="Id_Categoria" value="">
                     <input type="hidden" value="categorias_update_form" name="opcion">
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger form-control" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger form-control" data-bs-dismiss="modal">Salir</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+        window.onload = () => {
+            $('.btn_update').click(function(e) {
+                e.preventDefault();
+                let _Des_Categoria = this.getAttribute('data-descripcion')
+                let _Id_Categoria = this.getAttribute('data-id')
+                
+                Id_Categoria.value = _Id_Categoria
+                nombreCatMod.value = _Des_Categoria
+            });
+        }
+    </script>

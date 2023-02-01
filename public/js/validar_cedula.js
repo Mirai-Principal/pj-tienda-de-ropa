@@ -1,6 +1,6 @@
-function ValidarCI() {
+function ValidarCI(CI) {
 
-  var CI = document.getElementById("ci").value;
+  // var CI = document.getElementById("ci").value;
   var dig, aux, par = 0, mult, imp = 0, Suma, div, da;
   for (var i = 0; i < 9; i++) {
     aux = i + 1;
@@ -23,8 +23,8 @@ function ValidarCI() {
     div = 10 - div;
   }
   if (div == da) {
-    alert('La cédula fue ingresada correctamente');
+    return true
   } else {
-    alert('La cédula fue ingresada incorrectamente');
+    return false
   }
 }

@@ -7,14 +7,14 @@ $datos = array();
 while ($fila = mysqli_fetch_assoc($res)) {
     // array_push($datos, $fila);
     $datos[] = $fila;
-} 
+}
 
 ?>
 
 <h1>Registrar Empleado</h1>
 <form action="/empleado/insert" method="post" class="text-center" id="signup_personal_form">
-    <input type="text" id="nombre" name="nombre" placeholder="NOMBRE" required pattern="[A-Za-z\s]{4-50}">
-    <input type="text" id="apellido" name="apellido" placeholder="APELLIDO" required pattern="[A-Za-z\s]{4-50}"> <br> <br>
+    <input type="text" id="nombre" name="nombre" placeholder="NOMBRE" required pattern="[A-Za-z\s]{4,50}">
+    <input type="text" id="apellido" name="apellido" placeholder="APELLIDO" required pattern="[A-Za-z\s]{4,50}"> <br> <br>
     <input type="text" id="telefono" name="telefono" placeholder="TELÉFONO" required pattern="[0-9]{10}">
     <input type="text" id="correo" name="correo" placeholder="CORREO" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"> <br> <br>
     <select name="ciudad" id="ciudad" required>
@@ -24,7 +24,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
         <?php } ?>
     </select>
     <input type="text" id="direccion" name="direccion" placeholder="DIRECCIÓN" required pattern="[A-Za-z0-9\s]+"> <br> <br>
-    <input type="text" id="cedula" name="cedula" placeholder="CÉDULA" required pattern="[0-9]{10}"> <br> <br>
+    <input type="text" id="cedula" name="cedula" onfocusout="veficar_cedula()" placeholder="CÉDULA" required pattern="[0-9]{10}"> <br> <br>
     <input type="text" id="usuario" name="usuario" placeholder="USUARIO" required pattern="[A-Za-z]{4-15}">
     <input type="password" id="contrasena" name="contrasena" placeholder="CONTRASEÑA" required pattern="{8,12}"> <br> <br>
     <input type="password" id="clave" name="clave" placeholder="CLAVE APLICACIÓN" required pattern="{8,12}"> <br> <br>
@@ -47,9 +47,13 @@ while ($fila = mysqli_fetch_assoc($res)) {
                     icon: 'success',
                     title: 'Registro completado'
                 })
-                
+
                 signup_personal_form.reset()
             }
         })
+    }
+
+    function veficar_cedula() {
+        alert(ValidarCI(cedula.value))
     }
 </script>

@@ -39,21 +39,20 @@
                             ?>
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="/">Inicio</a>
+                                </li>.<li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="/carrito">carrito</a>
                                 </li>
-
-                                <li class="nav-item dropdown">
+                                </li>.<li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="/pedidos">Mis compras</a>
+                                </li>
+                                <!-- <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Mi perfil
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><a class="dropdown-item" href="#">Mis compras</a></li>
                                     </ul>
-                                </li>
+                                </li> -->
                             <?php } else { ?>
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="/dashboard">Inicio</a>
@@ -70,15 +69,14 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="/categorias">Categorías</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><a class="dropdown-item" href="/color_tela">Color de la tela</a></li>
+                                        <li><a class="dropdown-item" href="/talla">Tallas</a></li>
+                                        <li><a class="dropdown-item" href="/productos">Productos</a></li>
+                                        <li><a class="dropdown-item" href="/modelos">Modelos</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/ventas">Ventas</a>
+                                    <a class="nav-link" href="/compras">Ventas</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -86,11 +84,8 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="/iva">Modificar IVA</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><a class="dropdown-item" href="/clave_app">Cabiar clave de la aplicación</a></li>
+                                        <li><a class="dropdown-item" href="/cuenta_bancaria">Cuentas bancarias</a></li>
                                     </ul>
                                 </li>
                             <?php } ?>
@@ -117,8 +112,8 @@
                         </div>
                         <div class="modal-body pb-0">
                             <form action="/login/read" method="post">
-                                <input type="text" name="username" placeholder="Nombre de Usuario" class="form-control">
-                                <input type="password" name="password" placeholder="Contraseña" class="form-control">
+                                <input type="text" name="username" placeholder="Nombre de Usuario" class="form-control" required>
+                                <input type="password" name="password" placeholder="Contraseña" class="form-control" required>
                                 <button type="submit" class="btn btn-primary form-control">Ingresar</button>
 
                                 <input type="hidden" value="login" name="opcion">

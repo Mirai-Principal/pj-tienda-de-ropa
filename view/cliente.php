@@ -10,8 +10,8 @@ while ($fila = mysqli_fetch_assoc($res)) {
 
 <h1>Registrar Cliente</h1>
 <form action="/cliente/insert" method="post" class="text-center" id="signup_cliente_form">
-    <input type="text" id="nombre" name="nombre" placeholder="NOMBRE" required pattern="[A-Za-z\s]{4-50}">
-    <input type="text" id="apellido" name="apellido" placeholder="APELLIDO" required pattern="[A-Za-z\s]{4-50}"> <br> <br>
+    <input type="text" id="nombre" name="nombre" placeholder="NOMBRE" required pattern="[A-Za-z\s]{4,50}">
+    <input type="text" id="apellido" name="apellido" placeholder="APELLIDO" required pattern="[A-Za-z\s]{4,50}"> <br> <br>
     <input type="text" id="telefono" name="telefono" placeholder="TELÉFONO" required pattern="[0-9]{10}">
     <input type="text" id="correo" name="correo" placeholder="CORREO" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"> <br> <br>
     <select name="ciudad" id="ciudad" required>
@@ -40,6 +40,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
 
     <input type="password" id="contrasena" name="contrasena" placeholder="CONTRASEÑA" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres"> <br> <br>
+            
     <input type="submit" value="Registrar" class="btn btn-primary w-50 form-control" id="registro">
     <a class="btn btn-danger w-50 form-control" id="salir" href="/">Salir</a>
 
@@ -51,9 +52,9 @@ while ($fila = mysqli_fetch_assoc($res)) {
     tipo.onchange = () => {
         let tipo_cliente = tipo.value
         if (tipo_cliente == 'Empresa')
-            cedula_contenedor.innerHTML = '<input type="text" id="ruc" name="ruc" placeholder="RUC" required pattern="[0-9]{13}" maxlength="13">'
+            cedula_contenedor.innerHTML = '<input type="text" id="ruc" name="ruc" placeholder="RUC" required pattern="[0-9]{13}" maxlength="13" onfocusout="veficar_ruc()">'
         else
-            cedula_contenedor.innerHTML = '<input type="text" id="cedula" name="cedula" placeholder="CÉDULA" required pattern="[0-9]{10}" maxlength="10">'
+            cedula_contenedor.innerHTML = '<input type="text" id="cedula" name="cedula" onfocusout="veficar_cedula()" placeholder="CÉDULA" required pattern="[0-9]{10}" maxlength="10">'
     }
 
     signup_cliente_form.onsubmit = (e) => {
@@ -72,5 +73,13 @@ while ($fila = mysqli_fetch_assoc($res)) {
                 signup_cliente_form.reset()
             }
         })
+    }
+
+    function veficar_cedula() {
+        alert(ValidarCI(cedula.value))
+    }
+
+    function veficar_ruc() {
+        alert(ValidarCI(ruc.value.substring(0, 10)))
     }
 </script>

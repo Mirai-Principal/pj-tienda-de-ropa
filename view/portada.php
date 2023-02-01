@@ -15,12 +15,12 @@ while ($fila = mysqli_fetch_assoc($res)) {
 
 <div class="row text-center">
     <?php foreach ($datos as $key => $fila) { ?>
-        <div class="col-md-4 text-center">
+        <div class="col-md-2 text-center">
             <div class="card p-2">
                 <img src="<?= PATH_FILES . 'categorias/' . $fila['img_categoria'] ?>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title"><?= $fila['Des_Categoria'] ?></h5>
-                    <a href="/productos" class="btn btn-primary">Ver Productos</a>
+                    <a href="/modelos_producto" class="btn btn-primary">Ver Productos</a>
                 </div>
             </div>
         </div>

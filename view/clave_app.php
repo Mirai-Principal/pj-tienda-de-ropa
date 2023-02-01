@@ -1,3 +1,8 @@
+<?php 
+if ( !(isset($_SESSION['tipo_persona']) && $_SESSION['tipo_persona'] == 'personal') )
+header('Location: /');
+?>
+
 <div class="row">
     <div class="col">
         <h1>Modificar Clave de la aplicación</h1>
